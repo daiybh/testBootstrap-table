@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Hello, Bootstrap Table!</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.24.1/dist/bootstrap-table.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>haah</h1>
+    
+<table
+id="table"
+data-toggle="table"
+data-height="460"
+data-url="data1.json"
+>
+<thead>
+  <tr>
+    <th data-field="id">
+      ID
+    </th>
+    <th data-field="name"
+      data-formatter="nameFormatter"
+    >
+      Item Name
+    </th>
+    <th data-field="price">
+      Item Price
+    </th>
+    <th
+      data-field="amount"
+      data-formatter="operateFormatter"
+      data-events="operateEvents"
+    >
+      operata
+    </th>
+  </tr>
+</thead>
+</table>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.24.1/dist/bootstrap-table.min.js"></script>
+
+<script>
+   const $table = $('#table')
+
+   window.nameFormatter = (value, row, index) => {
+     return `<a href="javascript:void(0)" class="edit" data-index="${index}" data-name="${value}">${value}</a>`
+   }
+window.operateFormatter = (value, row, index) => {
+  b=  [
+  '<a class="like" href="javascript:void(0)" title="Like">',
+  'like',
+  '</a>  ',
+  '<a class="remove" href="javascript:void(0)" title="Remove">',
+  'trash',
+  '</a>'
+].join('');
+
+return b;
+  }
+
+window.operateEvents = {
+  'click .like': (e, value, row) => {
+    alert(`You click like action, row: ${JSON.stringify(row)}`)
+  },
+  'click .remove': (e, value, row) => {
+    $table.bootstrapTable('remove', {
+      field: 'id',
+      values: [row.id]
+    })
+  }
+}
+</script>
+</body>
+
+</html>
